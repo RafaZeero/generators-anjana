@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="generator.js"></script>
+    <title>Generators</title>
+  </head>
+  <body>
+    <header>
+      <h1>Generators</h1>
+    </header>
+    <main>
+      <section>
+        <h2>
+          Custom iterables with
+          <span style="color: blue; font-style: italic">@@iterator</span>
+        </h2>
+        <p>code:</p>
+        <code>
+          <pre>
+            const cardDeck = {
+              suits: ['♣', ' ♠', '♥', '♦'],
+              court: ['J', 'Q', 'K', 'A'],
+              [Symbol.iterator]: function* () {
+                for (let suit of this.suits) {
+                  for (let i = 2; i <= 10; i++) yield suit + i;
+                  for (let c of this.court) yield suit + c;
+                }
+              }
+            };            
+          </pre>
+        </code>
+        <div
+          style="
+            border: 2px solid red;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            margin-bottom: 20px;
+          "
+        >
+          <label for="for-loop">For loop button</label>
+          <button onclick="for (const i of cardDeck) console.log(i)">
+            Log code
+          </button>
+        </div>
+        <div
+          style="
+            border: 2px solid blue;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+          "
+        >
+          <label for="spread-operator">Spread operator button</label>
+          <button onclick="console.log([...cardDeck])">Log code</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
